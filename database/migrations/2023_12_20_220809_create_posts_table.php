@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('slug')->nullable();
+            $table->string('type')->default('blog');
+            $table->integer('status')->default(1);
+            $table->integer('featured')->default(1);
+            $table->string('lang')->default('en');
             $table->timestamps();
         });
     }
