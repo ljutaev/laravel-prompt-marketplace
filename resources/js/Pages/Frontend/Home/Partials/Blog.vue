@@ -16,6 +16,8 @@
             </div>
             <div class="grid gap-8 lg:grid-cols-3">
                 <article
+                    v-for="post in props.posts"
+                    :key="post"
                     class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
                 >
                     <div
@@ -36,31 +38,19 @@
                             </svg>
                             Tutorial
                         </span>
-                        <span class="text-sm">14 days ago</span>
+                        <span class="text-sm">{{ post.created_at_diff }}</span>
                     </div>
                     <h2
                         class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
                     >
-                        <a href="#">How to quickly deploy a static website</a>
+                        <a href="#">{{ post.title }}</a>
                     </h2>
                     <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
-                        Static websites are now used to bootstrap lots of
-                        websites and are becoming the basis for a variety of
-                        tools that even influence both web designers and
+                        {{ post.short_description.value }}
                     </p>
                     <div class="flex justify-between items-center">
-                        <div class="flex items-center space-x-4">
-                            <img
-                                class="w-7 h-7 rounded-full"
-                                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-                                alt="Jese Leos avatar"
-                            />
-                            <span class="font-medium dark:text-white">
-                                Jese Leos
-                            </span>
-                        </div>
-                        <a
-                            href="#"
+                        <Link
+                            :href="post.posturl"
                             class="inline-flex items-center font-medium text-primary-600 dark:text-white hover:underline"
                         >
                             Read more
@@ -76,11 +66,16 @@
                                     clip-rule="evenodd"
                                 ></path>
                             </svg>
-                        </a>
+                        </Link>
                     </div>
                 </article>
             </div>
         </div>
     </section>
 </template>
-<script setup></script>
+<script setup>
+import { Link } from "@inertiajs/vue3";
+const props = defineProps({
+    posts: Object,
+});
+</script>

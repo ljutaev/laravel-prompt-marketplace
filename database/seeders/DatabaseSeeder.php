@@ -18,5 +18,21 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // \App\Models\Post::factory(10)->create([
+        //     'user_id' => 1,
+        // ]);
+        $this->call([
+            PostSeeder::class
+        ]);
+
+        foreach (range(1,50) as $index) {
+            \App\Models\Postmeta::create([
+                'post_id' => $index,
+                'key' => 'short_description',
+                'value' => fake()->sentence(10),
+        ]);
+        }
+               
     }
 }
